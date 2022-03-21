@@ -1,0 +1,93 @@
+\documentclass{article}
+
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks = true,
+    urlcolor = blue,       % color of external links using \href
+    linkcolor= blue,       % color of internal links 
+    citecolor= blue,       % color of links to bibliography
+    filecolor= blue,        % color of file links
+    }
+    
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\title{CPSC-402 Report\\Compiler Construction}
+\author{Cameron Irving  \\ Chapman University}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\section{Project}
+For our project, we will be examining the g++ compiler by using it to convert c++ code into Assembly code and then interpret that code to understand how the compiler operates. 
+
+\subsection{C++ to Assembly using g++}
+Here we are using the most basic C++ file, and then compiling it using g++ with the \emph{-S} option\newline
+
+\begin{lstlisting}
+#include <stdio.h>
+int main() {
+  return 0;
+}
+\end{lstlisting}
+
+and then the Assembly code for this file returns as 
+
+\begin{lstlisting}
+	.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 11, 1	sdk_version 11, 1
+	.globl	_main                   ## -- Begin function main
+	.p2align	4, 0x90
+_main:                                  ## @main
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	xorl	%eax, %eax
+	movl	$0, -4(%rbp)
+	popq	%rbp
+	retq
+	.cfi_endproc
+                                        ## -- End function
+.subsections_via_symbols
+
+\end{lstlisting}
+
+\end{document}
